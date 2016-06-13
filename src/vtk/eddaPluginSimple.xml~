@@ -1,0 +1,228 @@
+<!-- Refrence: ParaViewCore/ServerManager/SMApplication/Resources -->
+<ServerManagerConfiguration>
+
+
+  <ProxyGroup name="filters">
+
+    <!-- ================================================================== -->
+    <SourceProxy name="EddaDistributionMean" class="vtkPVArrayCalculator">
+      <Documentation
+         long_help="Compute distribution mean for each point."
+         short_help="Compute distribution mean.">
+      </Documentation>
+
+      <InputProperty command="SetInputConnection"
+                     name="Input">
+        <ProxyGroupDomain name="groups">
+          <Group name="sources" />
+          <Group name="filters" />
+        </ProxyGroupDomain>
+        <DataTypeDomain name="input_type">
+          <DataType value="vtkDataSet" />
+        </DataTypeDomain>
+        <InputArrayDomain name="input_array" optional="1"/>
+        <Documentation>This property specifies the input dataset to the
+        Calculator filter. The scalar and vector variables may be chosen from
+        this dataset's arrays.</Documentation>
+      </InputProperty>
+
+      <IntVectorProperty command="SetAttributeMode"
+                         default_values="1"
+                         name="AttributeMode"
+                         number_of_elements="1">
+        <EnumerationDomain name="enum">
+          <Entry text="Point Data" value="1" />
+          <Entry text="Cell Data" value="2" />
+        </EnumerationDomain>
+        <Documentation>This property determines whether the computation is to
+        be performed on point-centered or cell-centered data.</Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty command="SetCoordinateResults"
+                         default_values="0"
+                         name="CoordinateResults"
+                         number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation>The value of this property determines whether the
+        results of this computation should be used as point coordinates or as a
+        new array.</Documentation>
+      </IntVectorProperty>
+      <IntVectorProperty command="SetResultNormals"
+                         default_values="0"
+                         name="ResultNormals"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <BooleanDomain name="bool" />
+        <Documentation>Set whether to output results as point/cell
+        normals. Outputing as normals is only valid with vector
+        results. Point or cell normals are selected using
+        AttributeMode.</Documentation>
+      </IntVectorProperty>
+     <IntVectorProperty command="SetResultTCoords"
+                         default_values="0"
+                         name="ResultTCoords"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <BooleanDomain name="bool" />
+        <Documentation>Set whether to output results as point/cell
+        texture coordinates.  Point or cell texture coordinates are
+        selected using AttributeMode. 2-component texture coordinates
+        cannot be generated at this time.</Documentation>
+      </IntVectorProperty>
+      <StringVectorProperty command="SetResultArrayName"
+                            default_values="Mean"
+                            name="ResultArrayName"
+                            number_of_elements="1">
+        <Documentation>This property contains the name for the output array
+        containing the result of this computation.</Documentation>
+      </StringVectorProperty>
+      <StringVectorProperty command="SetFunction"
+                            name="Function"
+                            number_of_elements="1"
+                            default_values="mean0*weight0+mean1*weight1+mean2*weight2+mean3*weight3" >
+        <Documentation>
+                          <!--panel_widget="calculator"-->
+This property contains the equation for computing the new
+array.
+        </Documentation>
+      </StringVectorProperty>
+      <IntVectorProperty command="SetReplaceInvalidValues"
+                         default_values="1"
+                         label="Replace Invalid Results"
+                         name="ReplaceInvalidValues"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <BooleanDomain name="bool" />
+        <Documentation>This property determines whether invalid values in the
+        computation will be replaced with a specific value. (See the
+        ReplacementValue property.)</Documentation>
+      </IntVectorProperty>
+      <DoubleVectorProperty command="SetReplacementValue"
+                            default_values="0.0"
+                            name="ReplacementValue"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <DoubleRangeDomain name="range" />
+        <Documentation>If invalid values in the computation are to be replaced
+        with another value, this property contains that value.</Documentation>
+      </DoubleVectorProperty>
+      <!-- End Calculator -->
+
+      <Hints>
+    <ShowInMenu category="EDDA" />
+      </Hints>
+
+    </SourceProxy>
+
+    <!-- ================================================================== -->
+    <SourceProxy name="EddaDistributionVariance" class="vtkPVArrayCalculator">
+      <Documentation
+         long_help="Compute distribution mean for each point."
+         short_help="Compute distribution mean.">
+      </Documentation>
+
+      <InputProperty command="SetInputConnection"
+                     name="Input">
+        <ProxyGroupDomain name="groups">
+          <Group name="sources" />
+          <Group name="filters" />
+        </ProxyGroupDomain>
+        <DataTypeDomain name="input_type">
+          <DataType value="vtkDataSet" />
+        </DataTypeDomain>
+        <InputArrayDomain name="input_array" optional="1"/>
+        <Documentation>This property specifies the input dataset to the
+        Calculator filter. The scalar and vector variables may be chosen from
+        this dataset's arrays.</Documentation>
+      </InputProperty>
+
+      <IntVectorProperty command="SetAttributeMode"
+                         default_values="1"
+                         name="AttributeMode"
+                         number_of_elements="1">
+        <EnumerationDomain name="enum">
+          <Entry text="Point Data" value="1" />
+          <Entry text="Cell Data" value="2" />
+        </EnumerationDomain>
+        <Documentation>This property determines whether the computation is to
+        be performed on point-centered or cell-centered data.</Documentation>
+      </IntVectorProperty>
+
+      <IntVectorProperty command="SetCoordinateResults"
+                         default_values="0"
+                         name="CoordinateResults"
+                         number_of_elements="1">
+        <BooleanDomain name="bool" />
+        <Documentation>The value of this property determines whether the
+        results of this computation should be used as point coordinates or as a
+        new array.</Documentation>
+      </IntVectorProperty>
+      <IntVectorProperty command="SetResultNormals"
+                         default_values="0"
+                         name="ResultNormals"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <BooleanDomain name="bool" />
+        <Documentation>Set whether to output results as point/cell
+        normals. Outputing as normals is only valid with vector
+        results. Point or cell normals are selected using
+        AttributeMode.</Documentation>
+      </IntVectorProperty>
+     <IntVectorProperty command="SetResultTCoords"
+                         default_values="0"
+                         name="ResultTCoords"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <BooleanDomain name="bool" />
+        <Documentation>Set whether to output results as point/cell
+        texture coordinates.  Point or cell texture coordinates are
+        selected using AttributeMode. 2-component texture coordinates
+        cannot be generated at this time.</Documentation>
+      </IntVectorProperty>
+      <StringVectorProperty command="SetResultArrayName"
+                            default_values="Mean"
+                            name="ResultArrayName"
+                            number_of_elements="1">
+        <Documentation>This property contains the name for the output array
+        containing the result of this computation.</Documentation>
+      </StringVectorProperty>
+      <StringVectorProperty command="SetFunction"
+                            name="Function"
+                            number_of_elements="1"
+                            default_values="(mean0*stdev0*stdev0+weight0*mean0^2)+(mean1*stdev1*stdev1+weight1*mean1^2)+(mean2*stdev2*stdev2+weight2*mean2^2)+(mean3*stdev3*stdev3+weight3*mean3^2)-( mean0*weight0 + mean1*weight1 + mean2*weight2 + mean3*weight3)^2" >
+        <Documentation>
+                          <!--panel_widget="calculator"-->
+This property contains the equation for computing the new
+array.
+        </Documentation>
+      </StringVectorProperty>
+      <IntVectorProperty command="SetReplaceInvalidValues"
+                         default_values="1"
+                         label="Replace Invalid Results"
+                         name="ReplaceInvalidValues"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <BooleanDomain name="bool" />
+        <Documentation>This property determines whether invalid values in the
+        computation will be replaced with a specific value. (See the
+        ReplacementValue property.)</Documentation>
+      </IntVectorProperty>
+      <DoubleVectorProperty command="SetReplacementValue"
+                            default_values="0.0"
+                            name="ReplacementValue"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <DoubleRangeDomain name="range" />
+        <Documentation>If invalid values in the computation are to be replaced
+        with another value, this property contains that value.</Documentation>
+      </DoubleVectorProperty>
+      <!-- End Calculator -->
+
+      <Hints>
+    <ShowInMenu category="EDDA" />
+      </Hints>
+
+    </SourceProxy>
+
+  </ProxyGroup>  <!-- End Filters Group -->
+</ServerManagerConfiguration>

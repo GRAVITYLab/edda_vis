@@ -1,0 +1,212 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="filters">
+    <!-- ================================================================== -->
+    <SourceProxy name="EddaUncertainIsocontour" class="eddaUncertainIsocontour" label="EddaUncertainIsocontour">
+      <Documentation
+         long_help="Compute uncertain isocontour with level crossing probability."
+         short_help="Uncertain Isocontour">
+      </Documentation>
+
+     <InputProperty
+        name="Input"
+        command="SetInputConnection">
+           <ProxyGroupDomain name="groups">
+             <Group name="sources"/>
+             <Group name="filters"/>
+           </ProxyGroupDomain>
+           <DataTypeDomain name="input_type">
+             <DataType value="vtkDataSet"/>
+           </DataTypeDomain>
+      </InputProperty>
+
+  <DoubleVectorProperty name="Isovalue"
+                        command="SetIsov"
+                        number_of_elements="1"
+                        default_values="1">
+  </DoubleVectorProperty>
+
+      <Hints>
+    <ShowInMenu category="EDDA" />
+      </Hints>
+ 
+    </SourceProxy>
+
+    <!-- ================================================================== -->
+    <SourceProxy name="EddaRandomSampleField" class="eddaRandomSampleField" label="EddaRandomSampleField">
+      <Documentation
+         long_help="Obtain random samples from distribution data."
+         short_help="Random sampling">
+      </Documentation>
+
+     <InputProperty
+        name="Input"
+        command="SetInputConnection">
+           <ProxyGroupDomain name="groups">
+             <Group name="sources"/>
+             <Group name="filters"/>
+           </ProxyGroupDomain>
+           <DataTypeDomain name="input_type">
+             <DataType value="vtkDataSet"/>
+           </DataTypeDomain>
+      </InputProperty>
+
+      <Hints>
+    <ShowInMenu category="EDDA" />
+      </Hints>
+ 
+    </SourceProxy>
+
+    <!-- ==================================================================== -->
+    <SourceProxy class="eddaRandomProbeFilter"
+                 label="EddaRandomProbeFilter"
+                 name="EddaRandomProbeFilter">
+      <Documentation long_help="Sample data attributes at the points of a dataset."
+                     short_help="Sample data values at the points of a dataset.">
+                     Probe is a filter that computes point attributes at
+                     specified point positions. The filter has two inputs: the
+                     Input and Source.  The 'Source' geometric structure is passed
+                     through the filter. The point attributes are computed at
+                     the 'Source' point positions by interpolating into the
+                     'Input' data. For example, we can compute data values on a plane
+                     (plane specified as Source) from a volume (Input). The
+                     cell data of the Input data is copied to the output based
+                     on in which Input cell each Source point is. If an array
+                     of the same name exists both in Input's point and cell
+                     data, only the one from the point data is
+                     probed.</Documentation>
+      <InputProperty command="SetSourceConnection"
+                     name="Input">
+        <ProxyGroupDomain name="groups">
+          <Group name="sources" />
+          <Group name="filters" />
+        </ProxyGroupDomain>
+        <DataTypeDomain name="input_type">
+          <DataType value="vtkDataSet" />
+          <DataType value="vtkCompositeDataSet" />
+        </DataTypeDomain>
+        <InputArrayDomain name="input_array" />
+        <Documentation>This property specifies the dataset from which to obtain
+        probe values. The data attributes come from this dataset.</Documentation>
+      </InputProperty>
+      <InputProperty command="SetInputConnection"
+                     name="Source">
+        <ProxyGroupDomain name="groups">
+          <Group name="sources" />
+          <Group name="filters" />
+        </ProxyGroupDomain>
+        <DataTypeDomain name="input_type">
+          <DataType value="vtkDataSet" />
+        </DataTypeDomain>
+        <Documentation>This property specifies the dataset whose geometry will
+        be used in determining positions to probe. The mesh comes from this
+        dataset.</Documentation>
+      </InputProperty>
+      <IntVectorProperty command="SetPassCellArrays"
+                         default_values="0"
+                         name="PassCellArrays"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <Documentation>
+        When set the input's cell data arrays are shallow copied to the output.
+        </Documentation>
+        <BooleanDomain name="bool" />
+      </IntVectorProperty>
+      <IntVectorProperty command="SetPassPointArrays"
+                         default_values="0"
+                         name="PassPointArrays"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <Documentation>
+        When set the input's point data arrays are shallow copied to the output.
+        </Documentation>
+        <BooleanDomain name="bool" />
+      </IntVectorProperty>
+
+      <IntVectorProperty command="SetPassFieldArrays"
+                         default_values="1"
+                         name="PassFieldArrays"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <Documentation>
+        Set whether to pass the field-data arrays from the Input i.e. the input
+        providing the geometry to the output. On by default.
+        </Documentation>
+        <BooleanDomain name="bool" />
+      </IntVectorProperty>
+
+      <IntVectorProperty command="SetComputeTolerance"
+                         default_values="0"
+                         name="ComputeTolerance"
+                         number_of_elements="1"
+                         panel_visibility="advanced">
+        <Documentation>
+        Set whether to compute the tolerance or to use a user provided
+        value. On by default.
+        </Documentation>
+        <BooleanDomain name="bool" />
+      </IntVectorProperty>
+
+      <DoubleVectorProperty command="SetTolerance"
+                            default_values="2.2204460492503131e-16"
+                            name="Tolerance"
+                            number_of_elements="1"
+                            panel_visibility="advanced">
+        <DoubleRangeDomain min="2.2204460492503131e-16"
+                           name="range" />
+        <Hints>
+          <PropertyWidgetDecorator type="ShowWidgetDecorator">
+            <Property name="ComputeTolerance" function="boolean_invert" />
+          </PropertyWidgetDecorator>
+        </Hints>
+        <Documentation>Set the tolernce to use for
+        vtkDataSet::FindCell</Documentation>
+      </DoubleVectorProperty>
+
+      <Hints>
+        <Visibility replace_input="1" />
+      </Hints>
+      <!-- End Probe -->
+    </SourceProxy>
+
+    <!-- ================================================================== -->
+    <SourceProxy class="eddaThreshold"
+                 name="EddaThreshold">
+      <Documentation long_help="Threshold"
+                          short_help="Threshold"></Documentation>
+
+      <InputProperty command="SetInputConnection"
+                     name="Input">
+        <ProxyGroupDomain name="groups">
+          <Group name="sources" />
+          <Group name="filters" />
+        </ProxyGroupDomain>
+        <DataTypeDomain name="input_type">
+          <DataType value="vtkDataSet" />
+        </DataTypeDomain>
+        <InputArrayDomain name="input_array"
+                          number_of_components="1">
+        </InputArrayDomain>
+        <Documentation>This property specifies the input to the Threshold
+        filter.</Documentation>
+      </InputProperty>
+
+      <DoubleVectorProperty command="ThresholdBetween"
+                            default_values="-1e-30 1e+30"
+                            label="Threshold Range"
+                            name="ThresholdBetween"
+                            number_of_elements="2"
+                            panel_widget="double_range">
+        <Documentation>The values of this property specify the upper and lower
+        bounds of the thresholding operation.</Documentation>
+      </DoubleVectorProperty>
+
+      <Hints>
+        <Visibility replace_input="1" />
+        <ShowInMenu category="EDDA" />
+      </Hints>
+      <!-- End Threshold -->
+    </SourceProxy>
+
+  </ProxyGroup>  <!-- End Filters Group -->
+</ServerManagerConfiguration>
+<!-- Refrence: ParaViewCore/ServerManager/SMApplication/Resources -->
