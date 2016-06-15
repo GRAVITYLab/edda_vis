@@ -110,14 +110,17 @@ endif ()
 # Set variables for platform detection.
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set (OS_LINUX ON)
+  add_definitions(-DOS_LINUX)
 endif ()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   set (OS_MACOSX ON)
+  add_definitions(-DOS_MACOSX)
 endif ()
 
 if (WIN32)
   set (OS_WIN ON)
+  add_definitions(-DOS_WIN)
 endif ()
 
 if (${EDDA_BUILD_SHARED_LIBS})
