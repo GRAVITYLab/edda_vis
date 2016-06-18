@@ -6,13 +6,9 @@ add_definitions(-DSAMPLE_DATA_PATH="${CMAKE_SOURCE_DIR}/sample_data")
 
 set(sources
   uncertainIsocontourVTK.cpp
-  streamlineMonteCarlo.cpp
-  streamlineGaussianVTK.cpp
-  randomSample.cpp
-  denseSamplingField.cpp
+  randomSampleField.cpp
   fuzzyIsocontourVTK.cpp
   test_vtk_filters.cpp
-  gmm_raw2vtk.cpp
 )
 
 IF(APPLE)
@@ -30,6 +26,6 @@ foreach (file ${sources})
     add_executable ( ${name} ${EXECUTABLE_FLAG} ${file} )
   endif ()
 
-  target_link_libraries ( ${name} edda edda_vis ${LINK_LIBS} )
+  target_link_libraries ( ${name} edda_vis ${LINK_LIBS} )
 endforeach ()
 

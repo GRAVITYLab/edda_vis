@@ -1,0 +1,9 @@
+gtype  regular
+xdim   148
+ydim    89
+zdim    21
+dtype   gaussian
+vtype   float
+tuples  3
+mfile   SW6_PIV.raw
+sfile   SW6_PIV_std.raw

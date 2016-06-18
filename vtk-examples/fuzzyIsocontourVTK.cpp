@@ -37,7 +37,7 @@
 #include "filters/level_crossing_prob.h"
 #include "vtk/vtk_common.h"
 #include "vtk/eddaUncertainIsocontour.h"
-#include <vtk/gmm_vtk_data_array.h>
+#include <io/gmm_vtk_data_array.h>
 #include "core/gmm_array.h"
 #include "filters/fuzzy_isosurface.h"
 

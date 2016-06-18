@@ -2,7 +2,11 @@
 # Use of this source code is governed by a MIT-style license that can be
 # found in the LICENSE file.
 
-set (SRC_DIRS filters vtk)
+set (SRC_DIRS filters io)
+
+if (EDDA_BUILD_VTK_FILTERS)
+  list(APPEND SRC_DIRS vtk)
+endif ()
 
 foreach (dir in ${SRC_DIRS})
   file(GLOB tmp ${dir}/*.cpp ${dir}/*.cu)

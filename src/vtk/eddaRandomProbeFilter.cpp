@@ -25,7 +25,7 @@
 #include "vtkObjectFactory.h"
 #include "vtkPointData.h"
 #include "vtkStreamingDemandDrivenPipeline.h"
-#include "gmm_vtk_data_array.h"
+#include "io/gmm_vtk_data_array.h"
 #include "vtk_common.h"
 #include "eddaSamplingArray.h"
 

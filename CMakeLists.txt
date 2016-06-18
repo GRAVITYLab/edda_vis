@@ -8,9 +8,9 @@ cmake_minimum_required (VERSION 2.8)
 project (edda_vis)
 
 ### Provide options that the user can optionally select.
-option (EDDA_BUILD_VTK_EXAMPLES "Build the example programs." ON)
 option (EDDA_BUILD_SHARED_LIBS "Build into shared libraries." ON)
-option (EDDA_BUILD_PARAVIEW_PLUGINS "Build Paraview Plugins." OFF)
+option (EDDA_BUILD_VTK_FILTERS "Build VTK filters supported by EDDA." ON)
+option (EDDA_BUILD_PARAVIEW_PLUGINS "Build Paraview Plugins. If ON, EDDA_BUILD_VTK_FILTERS must also be ON." OFF)
 set (EDDA_INSTALL_DIR "/usr/local" CACHE PATH "EDDA build path")
 
 set (THRUST_DEVICE_SYSTEM "CUDA" CACHE STRING "Thrust device backend (CUDA/TBB/OPENMP/CPP).")
@@ -32,6 +32,8 @@ endif()
 
 # All warnings on
 #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -Wall)
+
+list(APPEND LINK_LIBS edda)
 
 
 # Load settings for the boost project.
@@ -110,17 +112,14 @@ endif ()
 # Set variables for platform detection.
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set (OS_LINUX ON)
-  add_definitions(-DOS_LINUX)
 endif ()
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   set (OS_MACOSX ON)
-  add_definitions(-DOS_MACOSX)
 endif ()
 
 if (WIN32)
   set (OS_WIN ON)
-  add_definitions(-DOS_WIN)
 endif ()
 
 if (${EDDA_BUILD_SHARED_LIBS})
@@ -146,19 +145,20 @@ endif ()
 
 
 #################### VTK fix for Cuda #######################
-macro(REMOVE_VTK_DEFINITIONS)
-    get_directory_property(_dir_defs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS)
-    set(_vtk_definitions)
-    foreach(_item ${_dir_defs})
-        if(_item MATCHES "vtk*")
-            list(APPEND _vtk_definitions -D${_item})
-        endif()
-    endforeach()
-    remove_definitions(${_vtk_definitions})
-endmacro(REMOVE_VTK_DEFINITIONS)
+if (EDDA_BUILD_WITH_CUDA)
+    macro(REMOVE_VTK_DEFINITIONS)
+        get_directory_property(_dir_defs DIRECTORY ${CMAKE_SOURCE_DIR} COMPILE_DEFINITIONS)
+        set(_vtk_definitions)
+        foreach(_item ${_dir_defs})
+            if(_item MATCHES "vtk*")
+                list(APPEND _vtk_definitions -D${_item})
+            endif()
+        endforeach()
+        remove_definitions(${_vtk_definitions})
+    endmacro(REMOVE_VTK_DEFINITIONS)
 
-REMOVE_VTK_DEFINITIONS()
-
+    REMOVE_VTK_DEFINITIONS()
+endif()
 
 
 # Add include directories to the build.
@@ -167,11 +167,14 @@ include_directories (${CMAKE_SOURCE_DIR}/filters)
 include_directories (${CMAKE_SOURCE_DIR}/src)
 link_directories( ${EDDA_INSTALL_DIR}/lib/edda )
 
+
 # Add the src subdirectory to the build.
 add_subdirectory (src)
 
+add_subdirectory(examples)
+
 # If EDDA_BUILD_VTK_EXAMPLES is on, add the examples subdirectory to the build.
-if (EDDA_BUILD_VTK_EXAMPLES)
+if (EDDA_BUILD_VTK_FILTERS)
   add_subdirectory (vtk-examples)
 endif ()
 

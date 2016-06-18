@@ -6,7 +6,7 @@
 #include "vtkDataSetAlgorithm.h"
 #include "vtkDataSetAttributes.h" // needed for vtkDataSetAttributes::FieldList
 
-#include "gmm_vtk_data_array.h"
+#include "io/gmm_vtk_data_array.h"
 
 class vtkIdTypeArray;
 class vtkCharArray;

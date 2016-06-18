@@ -10,7 +10,7 @@
 #include "vtkObjectFactory.h"
 #include "vtkStreamingDemandDrivenPipeline.h"
 
-#include "gmm_vtk_data_array.h"
+#include "io/gmm_vtk_data_array.h"
 #include "filters/random_sample_field.h"
 
 using namespace std;

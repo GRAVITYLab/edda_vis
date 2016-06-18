@@ -9,7 +9,7 @@
 #include "vtkInformationVector.h"
 #include "vtkObjectFactory.h"
 
-#include "gmm_vtk_data_array.h"
+#include "io/gmm_vtk_data_array.h"
 
 #include "eddaThreshold.h"
 

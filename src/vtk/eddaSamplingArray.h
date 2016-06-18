@@ -22,7 +22,7 @@ public:
   static eddaSamplingArray *New();
 
   void SetEddaArray(edda::AbstractDataArray *array) {
-    pArray = new DataSamplingArray( array );
+    pArray = new AbstractSamplingArray( array );
     this->SetNumberOfComponents( array->getNumComponents() );
     this->SetNumberOfTuples(array->getLength());
   }

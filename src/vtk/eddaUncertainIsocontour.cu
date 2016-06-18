@@ -16,7 +16,7 @@
 #include "vtkPointData.h"
 #include "vtkStreamingDemandDrivenPipeline.h"
 
-#include "gmm_vtk_data_array.h"
+#include "io/gmm_vtk_data_array.h"
 #include <filters/level_crossing_prob.h>
 
 using namespace std;
