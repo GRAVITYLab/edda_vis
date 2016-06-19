@@ -7,6 +7,7 @@ add_definitions(-DSAMPLE_DATA_PATH="${CMAKE_SOURCE_DIR}/sample_data")
 set(sources
   streamlineMonteCarlo.cpp
   streamlineGaussianVTK.cpp
+  loadScalarDataset.cpp
   gmm_raw2vtk.cpp
 )
 

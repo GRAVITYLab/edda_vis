@@ -9,11 +9,11 @@ project (edda_vis)
 
 ### Provide options that the user can optionally select.
 option (EDDA_BUILD_SHARED_LIBS "Build into shared libraries." ON)
-option (EDDA_BUILD_VTK_FILTERS "Build VTK filters supported by EDDA." ON)
+option (EDDA_BUILD_VTK_FILTERS "Build VTK filters supported by EDDA." OFF)
 option (EDDA_BUILD_PARAVIEW_PLUGINS "Build Paraview Plugins. If ON, EDDA_BUILD_VTK_FILTERS must also be ON." OFF)
 set (EDDA_INSTALL_DIR "/usr/local" CACHE PATH "EDDA build path")
 
-set (THRUST_DEVICE_SYSTEM "CUDA" CACHE STRING "Thrust device backend (CUDA/TBB/OPENMP/CPP).")
+set (THRUST_DEVICE_SYSTEM "CPP" CACHE STRING "Thrust device backend (CUDA/TBB/OPENMP/CPP).")
 set_property(CACHE THRUST_DEVICE_SYSTEM PROPERTY STRINGS "CUDA;TBB;OPENMP;CPP")
 ###
 
