@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
   cout << "Loading sample file" << endl;
   string filename = SAMPLE_DATA_PATH;
-  filename = filename + "/out_92651_0.vts";
+  filename = filename + "/isabel_pressure_small.vti";
 
   // load data with random sampling
   shared_ptr<Dataset<Real> > dataset = loadEddaScalarDataset(filename, "");
