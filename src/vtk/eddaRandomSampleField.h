@@ -12,7 +12,7 @@ class vtkIdTypeArray;
 class vtkCharArray;
 class vtkMaskPoints;
 
-class VTKFILTERSCORE_EXPORT eddaRandomSampleField : public vtkDataSetAlgorithm
+class eddaRandomSampleField : public vtkDataSetAlgorithm
 {
 public:
   static eddaRandomSampleField *New();

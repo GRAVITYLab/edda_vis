@@ -43,7 +43,7 @@ class vtkIdTypeArray;
 class vtkCharArray;
 class vtkMaskPoints;
 
-class VTKFILTERSCORE_EXPORT eddaRandomProbeFilter : public vtkDataSetAlgorithm
+class eddaRandomProbeFilter : public vtkDataSetAlgorithm
 {
 public:
   static eddaRandomProbeFilter *New();

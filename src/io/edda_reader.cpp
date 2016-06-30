@@ -61,12 +61,12 @@ shared_ptr<Dataset<T> > loadEddaRandomSamplingDataset(const string &edda_file, c
   }
 }
 
-shared_ptr<Dataset<Real> > loadEddaScalarDataset(const string &edda_file, const string &array_name)
+shared_ptr<Dataset<Real> > EDDA_EXPORT loadEddaScalarDataset(const string &edda_file, const string &array_name)
 {
   return loadEddaRandomSamplingDataset<Real>(edda_file, array_name);
 }
 
-shared_ptr<Dataset<VECTOR3> > loadEddaVector3Dataset(const string &edda_file, const string &array_name)
+shared_ptr<Dataset<VECTOR3> > EDDA_EXPORT loadEddaVector3Dataset(const string &edda_file, const string &array_name)
 {
   return loadEddaRandomSamplingDataset<VECTOR3>(edda_file, array_name);
 }

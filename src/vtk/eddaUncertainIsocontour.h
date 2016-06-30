@@ -9,7 +9,7 @@ class vtkIdTypeArray;
 class vtkCharArray;
 class vtkMaskPoints;
 
-class VTKFILTERSCORE_EXPORT eddaUncertainIsocontour : public vtkDataSetAlgorithm
+class eddaUncertainIsocontour : public vtkDataSetAlgorithm
 {
 public:
   static eddaUncertainIsocontour *New();
